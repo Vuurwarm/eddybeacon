@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/damionunderworld/Documents/work/IBeacon/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/damionunderworld/Documents/work/IBeacon/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-3183dd94fb647a29f6d26836fe4123d7193b8321.jar" />
+    </item>
+    <item
+        jar="/Users/damionunderworld/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="/Users/damionunderworld/Documents/work/IBeacon/app/build/intermediates/pre-dexed/debug/okio-1.6.0-4b242a18007d5871d8d028459f6332e53f57245b.jar" />
+    </item>
+    <item
+        jar="/Users/damionunderworld/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/damionunderworld/Documents/work/IBeacon/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-c0b0faaf60a3bc9d1cdf7d24420ef3869eb98fb8.jar" />
+    </item>
+    <item
+        jar="/Users/damionunderworld/Documents/work/IBeacon/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/damionunderworld/Documents/work/IBeacon/app/build/intermediates/pre-dexed/debug/classes-aef97fd199ab254c7e2be4064617534d52264b02.jar" />
+    </item>
+    <item
+        jar="/Users/damionunderworld/Documents/work/IBeacon/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/damionunderworld/Documents/work/IBeacon/app/build/intermediates/pre-dexed/debug/classes-0f31893a5e2c58f256696f068edfa43520558979.jar" />
+    </item>
+    <item
+        jar="/Users/damionunderworld/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.6.0/212387a39088ecd3daff8e3bfc3bdc4123e33c67/okhttp-2.6.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="212387a39088ecd3daff8e3bfc3bdc4123e33c67">
+        <dex dex="/Users/damionunderworld/Documents/work/IBeacon/app/build/intermediates/pre-dexed/debug/okhttp-2.6.0-498b2441ae8ab9c630dc52700e5ef374417a2783.jar" />
+    </item>
+    <item
+        jar="/Users/damionunderworld/.gradle/caches/modules-2/files-2.1/com.github.provigen/ProviGen-lib/2.0.1/6130059a946e844d8520b16f6bb0e8a7673da046/ProviGen-lib-2.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6130059a946e844d8520b16f6bb0e8a7673da046">
+        <dex dex="/Users/damionunderworld/Documents/work/IBeacon/app/build/intermediates/pre-dexed/debug/ProviGen-lib-2.0.1-23e59b7df57a7143d207528264344e6b3fe8a9a6.jar" />
+    </item>
+    <item
+        jar="/Users/damionunderworld/Documents/work/IBeacon/app/build/intermediates/exploded-aar/com.estimote/sdk/0.9.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="09fa4dc711242896ba69fd3ad3384d1a8c349195">
+        <dex dex="/Users/damionunderworld/Documents/work/IBeacon/app/build/intermediates/pre-dexed/debug/classes-eea69e64955b134dd260e42b8698347cda56dbe2.jar" />
+    </item>
+
+</items>
