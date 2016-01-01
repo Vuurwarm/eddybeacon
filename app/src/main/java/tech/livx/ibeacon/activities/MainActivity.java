@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,10 +15,8 @@ import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.estimote.sdk.Beacon;
-import com.estimote.sdk.BeaconManager;
-import com.estimote.sdk.Region;
-
+import org.altbeacon.beacon.BeaconConsumer;
+import org.altbeacon.beacon.BeaconManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +41,7 @@ import tech.livx.ibeacon.services.ApiService.LocalBinder;
  * @version 1.0
  *
  */
-public class MainActivity extends AppCompatActivity implements ApiCallBackInterface, BeaconManager.RangingListener{
+public class MainActivity extends AppCompatActivity implements ApiCallBackInterface, BeaconConsumer{
     private static final String TAG = "MainActivity";
     private boolean isBound = false;
     private ApiService beaconService;
@@ -63,8 +62,6 @@ public class MainActivity extends AppCompatActivity implements ApiCallBackInterf
             beaconService = binder.getService();
             beaconService.addCallBack(MainActivity.this);
             isBound = true;
-            startRanging();
-            checkForResources();
         }
 
         @Override
@@ -75,8 +72,12 @@ public class MainActivity extends AppCompatActivity implements ApiCallBackInterf
 
     private void startRanging() {
         manager = application.getBeaconManager();
-        manager.startRanging(application.getRegion());
-        manager.setRangingListener(this);
+        try {
+            manager.startRangingBeaconsInRegion(application.getRegion());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            Log.i(TAG,"Error in getting region");
+        }
     }
 
     private void checkForResources() {
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements ApiCallBackInterf
         };
 
         adapter = new SimpleCursorAdapter(MainActivity.this,R.layout.activity_main,null,colombs,values,0);
-
+        manager = application.getBeaconManager();
 
     }
 
@@ -125,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements ApiCallBackInterf
         if(!isBound){
             Intent i = new Intent(MainActivity.this, ApiService.class);
             Bundle bun = new Bundle();
+            manager.bind(this);
             bindService(i, connection, Context.BIND_AUTO_CREATE);
         }
     }
@@ -216,16 +218,16 @@ public class MainActivity extends AppCompatActivity implements ApiCallBackInterf
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    public void onBeaconsDiscovered(Region region, List<Beacon> list) {
-        Log.i("AJ", "Beacon Discovered");
-        if(list.size() < 0){
-
-        }
-    }
-
     public void stopRanging(){
-        
+        if(manager == null)
+            manager = application.getBeaconManager();
+
+        try {
+            manager.stopRangingBeaconsInRegion(application.getRegion());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void parseResult(String result) throws JSONException {
@@ -244,5 +246,10 @@ public class MainActivity extends AppCompatActivity implements ApiCallBackInterf
             getContentResolver().insert(SpecialContract.CONTENT_URI, values);
         }
 
+    }
+
+    @Override
+    public void onBeaconServiceConnect() {
+        startRanging();
     }
 }

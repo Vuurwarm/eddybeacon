@@ -7,11 +7,12 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.estimote.sdk.BeaconManager;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
+import org.altbeacon.beacon.BeaconManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,10 +68,7 @@ public class ApiService extends Service {
                         for (int x = 0; x < array.size(); x++) {
                             String temp = response.body().string();
                             array.get(x).OnSuccess(temp, response.code());
-
                         }
-
-
                         return;
                     }
 
