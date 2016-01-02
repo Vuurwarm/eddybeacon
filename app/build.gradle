@@ -33,4 +33,5 @@ dependencies {
     //   https://github.com/Estimote/Android-SDK/releases
     compile 'com.squareup.okhttp:okhttp:2.6.0'
     compile 'com.github.provigen:ProviGen-lib:2.0.1'
+    compile 'com.android.support:design:23.1.1'
 }

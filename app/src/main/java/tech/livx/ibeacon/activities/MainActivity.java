@@ -7,9 +7,14 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
@@ -41,7 +46,7 @@ import tech.livx.ibeacon.services.ApiService.LocalBinder;
  * @version 1.0
  *
  */
-public class MainActivity extends AppCompatActivity implements ApiCallBackInterface, BeaconConsumer{
+public class MainActivity extends AppCompatActivity implements ApiCallBackInterface, BeaconConsumer, NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
     private boolean isBound = false;
     private ApiService beaconService;
@@ -49,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements ApiCallBackInterf
     private static long num = 0;
     private BeaconManager manager;
     private SimpleCursorAdapter adapter;
+
+    private DrawerLayout drawerLayout;
 
     //For exsample views(Delete after use)
     private Button button;
@@ -70,6 +77,39 @@ public class MainActivity extends AppCompatActivity implements ApiCallBackInterf
         }
     };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        if(savedInstanceState != null){
+            num = savedInstanceState.getLong("ApiId");
+        }
+        application = (MyApplication)getApplication();
+
+        String colombs[] = new String[]{
+                BeaconContract._ID,BeaconContract.MAJOR,BeaconContract.MINOR
+        };
+
+        int values[] = new int[]{
+        };
+
+        adapter = new SimpleCursorAdapter(MainActivity.this,R.layout.activity_main,null,colombs,values,0);
+        manager = application.getBeaconManager();
+
+    }
+
     private void startRanging() {
         manager = application.getBeaconManager();
         try {
@@ -87,38 +127,7 @@ public class MainActivity extends AppCompatActivity implements ApiCallBackInterf
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        if(savedInstanceState != null){
-            num = savedInstanceState.getLong("ApiId");
-        }
-        application = (MyApplication)getApplication();
 
-        button = (Button)findViewById(R.id.button);
-        textView = (TextView)findViewById(R.id.result_text_view);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                doApiCall("/beacons");
-            }
-        });
-
-        String colombs[] = new String[]{
-                BeaconContract._ID,BeaconContract.MAJOR,BeaconContract.MINOR
-        };
-
-        int values[] = new int[]{
-                R.id.major,
-                R.id.minor
-        };
-
-        adapter = new SimpleCursorAdapter(MainActivity.this,R.layout.activity_main,null,colombs,values,0);
-        manager = application.getBeaconManager();
-
-    }
 
     @Override
     protected void onStart() {
@@ -251,5 +260,10 @@ public class MainActivity extends AppCompatActivity implements ApiCallBackInterf
     @Override
     public void onBeaconServiceConnect() {
         startRanging();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        return false;
     }
 }
